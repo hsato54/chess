@@ -8,16 +8,22 @@ package chess;
  */
 public class ChessMove {
 
-    private ChessPosition startPosition;
-    private ChessPosition endPosition;
-    private ChessPiece.PieceType promotionPiece;
+    private ChessPosition startPos;
+    private ChessPosition endPos;
+    private ChessPiece.PieceType promo;
+    private ChessGame.TeamColor team;
+    private ChessPiece.PieceType type;
 
 
-    public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
-                     ChessPiece.PieceType promotionPiece) {
-        this.startPosition = start;
-        this.endPosition = end;
-        this.promotionPiece = promo;
+
+    public ChessMove(ChessPosition startPos, ChessPosition endPos,
+                     ChessPiece.PieceType promo, ChessGame.TeamColor team,
+                     ChessPiece.PieceType type) {
+        this.startPos = startPos;
+        this.endPos = endPos;
+        this.promo = promo;
+        this.team = team;
+        this.type = type;
     }
 
     /**
@@ -26,7 +32,7 @@ public class ChessMove {
     public ChessPosition getStartPosition() {
 
         //throw new RuntimeException("Not implemented");
-        return startPosition;
+        return startPos;
     }
 
     /**
@@ -35,7 +41,7 @@ public class ChessMove {
     public ChessPosition getEndPosition() {
 
         //throw new RuntimeException("Not implemented");
-        return endPosition;
+        return endPos;
     }
 
     /**
@@ -47,6 +53,14 @@ public class ChessMove {
     public ChessPiece.PieceType getPromotionPiece() {
 
         //throw new RuntimeException("Not implemented");
-
+        if (type == ChessPiece.PieceType.PAWN){
+            if (team == ChessGame.TeamColor.WHITE && end.getRow() == 7){
+                return promo;
+            }
+            if (team == ChessGame.TeamColor.BLACK && end.getRow() == 0){
+                return promo;
+            }
+        }
+        return null;
     }
 }
